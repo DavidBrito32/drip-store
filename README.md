@@ -26,11 +26,11 @@ A Drip Store é uma loja online especializada na venda de tênis e vestuário de
 - **Utilizando o yarn: yarn install**
 
 3. Inicie o servidor de desenvolvimento:
-- **Utilizando o npm: npm run dev**
-- **Utilizando o yarn: yarn dev**
+- Utilizando o npm: **npm run dev**
+- Utilizando o yarn: **yarn dev**
 
 4. Acesse a aplicação:
-- **http://localhost:5173/**
+- **http://localhost:5173/** - Porta utilizada no ambiente de desenvolvimento
 
 ## Contribuição
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues para reportar problemas, sugerir melhorias ou enviar pull requests.
