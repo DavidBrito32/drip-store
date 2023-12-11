@@ -7,6 +7,8 @@ A Drip Store é uma loja online especializada na venda de tênis e vestuário de
 - **React.js**: Biblioteca JavaScript para construção de interfaces de usuário.
 - **TypeScript (TS)**: Superset tipado do JavaScript, oferecendo tipos estáticos opcionais.
 - **Styled-Components**: Biblioteca para estilização de componentes com CSS-in-JS.
+- **React-Router-Dom**: A biblioteca responsavel por facilitar a navegação entre rotas na aplicação.
+- **Framer Motion**: Uma biblioteca de animações muito utilizada para tornar a navegação e a UX mais agradável.
 - **Prime React**: Conjunto de componentes React de alta qualidade.
 - **ESLint**: Ferramenta de análise de código estático para identificar e corrigir problemas no código JavaScript/TypeScript.
 
