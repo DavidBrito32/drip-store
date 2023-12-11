@@ -1,30 +1,42 @@
-# React + TypeScript + Vite
+# Drip Store - Loja Exclusiva de Tênis e Vestuário 🛍️👟
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descrição
+A Drip Store é uma loja online especializada na venda de tênis e vestuário de alta qualidade, oferecendo uma seleção exclusiva dos últimos lançamentos e marcas renomadas. Este projeto consiste na construção e desenvolvimento da plataforma da loja online.
 
-Currently, two official plugins are available:
+## Tecnologias Utilizadas
+- **React.js**: Biblioteca JavaScript para construção de interfaces de usuário.
+- **TypeScript (TS)**: Superset tipado do JavaScript, oferecendo tipos estáticos opcionais.
+- **Styled-Components**: Biblioteca para estilização de componentes com CSS-in-JS.
+- **Prime React**: Conjunto de componentes React de alta qualidade.
+- **ESLint**: Ferramenta de análise de código estático para identificar e corrigir problemas no código JavaScript/TypeScript.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Funcionalidades Principais
+- Navegação intuitiva e amigável para os usuários encontrarem produtos facilmente.
+- Catálogo com filtros por marca, tipo de produto e preço.
+- Páginas de detalhes dos produtos, exibindo informações detalhadas, imagens e opções de compra.
+- Carrinho de compras para selecionar e gerenciar itens antes do checkout.
+- Processo de checkout seguro e simplificado.
 
-## Expanding the ESLint configuration
+## Instalação e Uso
+1. Clone este repositório.
+- **https://github.com/DavidBrito32/drip-store-FRONT-END.git**
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+2. Instale as dependências:
+- **Utilizando o npm: npm install**
+- **Utilizando o yarn: yarn install**
 
-- Configure the top-level `parserOptions` property like this:
+3. Inicie o servidor de desenvolvimento:
+- **Utilizando o npm: npm run dev**
+- **Utilizando o yarn: yarn dev**
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+4. Acesse a aplicação:
+- **http://localhost:5173/**
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Contribuição
+Contribuições são bem-vindas! Sinta-se à vontade para abrir issues para reportar problemas, sugerir melhorias ou enviar pull requests.
+
+## Autores
+- [David Brito]-**https://github.com/DavidBrito32**
+
+## Licença
+Este projeto está licenciado sob a [Licença MIT](https://opensource.org/licenses/MIT).

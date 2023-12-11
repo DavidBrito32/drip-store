@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "license": "MIT",
   "author": {
     "name": "David Brito",
     "email": "davidbrito.carneiro458@gmail.com",
