@@ -1,7 +1,7 @@
-const App = () : JSX.Element => {
+const App = (): JSX.Element => {
   return (
     <>
-      <h1>Hello Word</h1>
+      <h1 className="text-color-red-500">Hello Word</h1>
     </>
   );
 };
