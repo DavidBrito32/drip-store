@@ -10,6 +10,7 @@ export const GlobalStyle = createGlobalStyle`
     list-style: none;
     text-decoration: none;
     font-family: 'Inter', sans-serif;
+    outline: none;
   }
 
   &:root{
