@@ -1,6 +1,8 @@
 import styled, { IStyledComponent } from "styled-components";
 import Carrousel from "../../../components/carrousel";
 import Colecoes from "../../../components/colecoes_em_destaque";
+import ProductsDestaque from "../../../components/products-destaque";
+import BannerRodape from "../../../components/banner-rodape";
 
 const Home = (): JSX.Element => {
   return(
@@ -8,13 +10,15 @@ const Home = (): JSX.Element => {
             <ContainerHome>
                 <Carrousel />
                 <Colecoes />
+                <ProductsDestaque />
+                <BannerRodape />
             </ContainerHome>
         </>     
      );
 };
 
 const ContainerHome: IStyledComponent<"web"> = styled.main`
-min-height: 110vh;
+
 `;
 
 export default Home;

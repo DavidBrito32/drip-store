@@ -12,7 +12,7 @@
   "scripts": {
     "dev": "vite",
     "build": "eslint . && tsc && vite build",
-    "lint": "eslint --fix ./ && eslint --fix ./src .",
+    "lint": "eslint --fix --ext .ts,.tsx ./ && eslint --fix --ext .ts,.tsx ./src",
     "preview": "vite preview",
     "server": "json-server --watch db.json"
   },
@@ -22,7 +22,8 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",
     "react-router-dom": "^6.20.1",
-    "styled-components": "^6.1.1"
+    "styled-components": "^6.1.1",
+    "yarn": "^1.22.21"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",

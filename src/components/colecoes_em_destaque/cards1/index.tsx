@@ -87,6 +87,10 @@ const Button = styled.button`
     border: none;
     border-radius: 8px;
     cursor: pointer;
+    transition-duration: .1s;
+      &:hover{
+        background-color: var(--Light_Gray_2);
+      }
 `;
 
 export default Card1;

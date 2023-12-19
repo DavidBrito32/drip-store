@@ -15,7 +15,7 @@
             "title": "Nike T-SHORT Evolution 🔥",
             "description": "Consequat culpa exercitation mollit nisi excepteur do do tempor laboris eiusmod irure consectetur.",
             "ctaButtonText": "Ver Ofertas",
-            "ctaButtonColor": "#C92071",
+            "ctaButtonColor": "#33EEC9",
             "imageBanner": "https://github.com/DavidBrito32/digital_store/blob/main/src/components/Caroussel/assets/Caroussel/Tenis2.png?raw=true"
         },
         {
@@ -24,7 +24,7 @@
             "title": "Nike Premium Edition 🔥",
             "description": "Consequat culpa exercitation mollit nisi excepteur do do tempor laboris eiusmod irure consectetur.",
             "ctaButtonText": "Ver Ofertas",
-            "ctaButtonColor": "#C92071",
+            "ctaButtonColor": "#254FCA",
             "imageBanner": "https://github.com/DavidBrito32/digital_store/blob/main/src/components/Caroussel/assets/Caroussel/Tenis3.png?raw=true"
         },
         {
@@ -33,7 +33,7 @@
             "title": "Nike Premium Edition 🔥",
             "description": "Consequat culpa exercitation mollit nisi excepteur do do tempor laboris eiusmod irure consectetur.",
             "ctaButtonText": "Ver Ofertas",
-            "ctaButtonColor": "#C92071",
+            "ctaButtonColor": "#33EEC9",
             "imageBanner": "https://github.com/DavidBrito32/digital_store/blob/main/src/components/Caroussel/assets/Caroussel/Tenis2.png?raw=true"
         },
         {
@@ -42,7 +42,7 @@
             "title": "Nike Premium Edition 🔥",
             "description": "Consequat culpa exercitation mollit nisi excepteur do do tempor laboris eiusmod irure consectetur.",
             "ctaButtonText": "Ver Ofertas",
-            "ctaButtonColor": "#C92071",
+            "ctaButtonColor": "#254FCA",
             "imageBanner": "https://github.com/DavidBrito32/digital_store/blob/main/src/components/Caroussel/assets/Caroussel/Tenis3.png?raw=true"
         },
         {
@@ -51,7 +51,7 @@
             "title": "Nike Premium Edition 🔥",
             "description": "Consequat culpa exercitation mollit nisi excepteur do do tempor laboris eiusmod irure consectetur.",
             "ctaButtonText": "Ver Ofertas",
-            "ctaButtonColor": "#C92071",
+            "ctaButtonColor": "#33EEC9",
             "imageBanner": "https://github.com/DavidBrito32/digital_store/blob/main/src/components/Caroussel/assets/Caroussel/Tenis2.png?raw=true"
         },
         {
@@ -61,7 +61,34 @@
             "description": "Consequat culpa exercitation mollit nisi excepteur do do tempor laboris eiusmod irure consectetur.",
             "ctaButtonText": "Ver Ofertas",
             "ctaButtonColor": "#C92071",
-            "imageBanner": "https://github.com/DavidBrito32/digital_store/blob/main/src/components/Caroussel/assets/Caroussel/Tenis1.png?raw=true"
+            "imageBanner": "https://github.com/DavidBrito32/digital_store/blob/main/src/components/Caroussel/assets/Caroussel/Tenis3.png?raw=true"
+        }
+    ],
+    "categorias": [
+        {
+            "id": 1,
+            "image": "https://cdn-icons-png.flaticon.com/128/3746/3746120.png",
+            "title": "Camisetas"
+        },
+        {
+            "id": 2,
+            "image": "https://cdn-icons-png.flaticon.com/128/862/862993.png",
+            "title": "Calças"
+        },
+        {
+            "id": 3,
+            "image": "https://cdn-icons-png.flaticon.com/128/7596/7596938.png",
+            "title": "Bonés"
+        },
+        {
+            "id": 4,
+            "image": "https://cdn-icons-png.flaticon.com/128/1804/1804712.png",
+            "title": "HeadPhones"
+        },
+        {
+            "id": 5,
+            "image": "https://cdn-icons-png.flaticon.com/128/5144/5144570.png",
+            "title": "Tênis"
         }
     ]
 }

@@ -8,6 +8,7 @@ interface StyleProps {
   key?: number | string;
   src?: string;
   alt?: string;
+  $ctaColor?: string;
 }
 type Banner = {
   id: string;
@@ -33,7 +34,7 @@ const Carrousel = () => {
                   <SupTitle>{item.supTitle}</SupTitle>
                   <Title>{item.title}</Title>
                   <Description>{item.description}</Description>
-                  <Button>Ver Ofertas</Button>
+                  <Button $ctaColor={item.ctaButtonColor}>Ver Ofertas</Button>
                 </Conteudo>
                 <FigureImage src={item.imageBanner} alt="Tenis" />
               </Item>
@@ -129,6 +130,7 @@ const Conteudo: IStyledComponent<
   >
 > = styled.div`
   width: 45%;
+  padding: 0 30px;
   @media only screen and (max-width: 768px) {
     width: 100%;
     margin: 30px 0;
@@ -222,7 +224,7 @@ const Button: IStyledComponent<
   width: 220px;
   height: 48px;
   border-radius: 5px;
-  background-color: var(--Primary);
+  background-color: ${(props) => props.$ctaColor || "var(--Primary)"};
   color: var(--Light_Gray_3);
   font-weight: 700;
   letter-spacing: var(--Short-spaced);

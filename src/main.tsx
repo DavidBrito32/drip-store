@@ -18,7 +18,7 @@ export const GlobalStyle = createGlobalStyle`
     --Primary: #C92071;
     --Primary_G: linear-gradient(180deg, #C92071 0%, #EDABCA 100%);
     --Secundary: #B5B6F2;
-    --Secundary_G: linear-gradient(180deg, #B5B6F2 0%, #EFEFFF 100%);
+    --Secundary_G: linear-gradient(180deg, #B5B6F2 0%, #EFEFFF 70%, transparent);
     --Tertiary: #991956;
     --Error: #EE4266;
     --Sucess: #52CA76;
@@ -38,12 +38,15 @@ export const GlobalStyle = createGlobalStyle`
 
     //Shadows
     --Slaved: 0px 4px 25px 0px rgba(0, 0, 0, 0.15);
+    --Slaved-hover: 0px 4px 25px 0px #C9207180;
 
     //spacing:
     --Large-spaced: 1px;
     --Short-spaced: .75px;
 
     //Border Radius
+    --Rounded_Default: 8px;
+    --Rounded_Full: 50%;
     --Pill-Rounded: 29px;
   }
 `;
