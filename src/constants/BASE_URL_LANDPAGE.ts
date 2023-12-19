@@ -1,0 +1,1 @@
+export const BASE_URL_LANDPAGE: string = 'http://localhost:3000/';

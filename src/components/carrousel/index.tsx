@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useAxios } from "../../hooks/useAxios";
 import { useState } from "react";
-import { BASE_URL } from "../../constants/BASE_URL";
+import { BASE_URL_LANDPAGE } from "../../constants/BASE_URL_LANDPAGE";
 interface StyleProps {
   $largura?: number;
   $slide?: number;
@@ -22,7 +22,7 @@ type Banner = {
 
 const Carrousel = () => {
   const [slide, setSlide] = useState<number>(0);
-  const { data, loading, error } = useAxios<Banner>(`${BASE_URL}banners`);
+  const { data, loading, error } = useAxios<Banner>(`${BASE_URL_LANDPAGE}banners`);
 
   return (
     <>

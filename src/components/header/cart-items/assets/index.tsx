@@ -1,4 +1,4 @@
-import styled, { IStyledComponent } from "styled-components";
+import styled from "styled-components";
 
 const CartItems = (): JSX.Element => {
     return (
@@ -16,7 +16,7 @@ const CartItems = (): JSX.Element => {
     );
 };
 
-const CartContainerItems: IStyledComponent<'web'> = styled.li`
+const CartContainerItems = styled.li`
     display: flex;
     gap: 20px;
     

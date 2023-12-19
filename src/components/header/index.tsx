@@ -1,5 +1,5 @@
 import { Link, NavLink, NavigateFunction, useNavigate } from "react-router-dom";
-import styled, { IStyledComponent } from "styled-components";
+import styled from "styled-components";
 import { FiShoppingCart } from "react-icons/fi";
 import { IoIosSearch } from "react-icons/io";
 import { useState } from "react";
@@ -104,7 +104,7 @@ const Header = (): JSX.Element => {
   );
 };
 
-const HeaderContainer: IStyledComponent<"web"> = styled.header`
+const HeaderContainer = styled.header`
   width: 100%;
   display: flex;
   align-items: center;
@@ -364,14 +364,14 @@ const HeaderContainer: IStyledComponent<"web"> = styled.header`
         display: flex;
         justify-content: space-between;
         align-items: center;
-        
-        & span{
+
+        & span {
           position: static;
           background-color: transparent;
           font-size: 16px;
           font-weight: 700;
           color: var(--Primary);
-          }
+        }
       }
 
       & ul {
@@ -499,7 +499,6 @@ const HeaderContainer: IStyledComponent<"web"> = styled.header`
     }
 
     & .input {
-      /* width: 22px; */
       flex: none;
       margin: 0;
       position: static;
@@ -677,7 +676,6 @@ const HeaderContainer: IStyledComponent<"web"> = styled.header`
     }
 
     & .input {
-      /* width: 22px; */
       flex: none;
       margin: 0;
       position: static;

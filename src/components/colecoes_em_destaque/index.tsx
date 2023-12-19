@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Card1 from "./cards1";
 import Card2 from "./cards2";
 import { useAxios } from "../../hooks/useAxios";
-import { BASE_URL } from "../../constants/BASE_URL";
+import { BASE_URL_LANDPAGE } from './../../constants/BASE_URL_LANDPAGE';
 
 interface RequestData {
   id: number;
@@ -12,7 +12,7 @@ interface RequestData {
 
 const Colecoes = (): JSX.Element => {
   const { data, loading, error } = useAxios<RequestData>(
-    `${BASE_URL}categorias`
+    `${BASE_URL_LANDPAGE}categorias`
   );
 
   return (
