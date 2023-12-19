@@ -23,6 +23,8 @@ export const GlobalStyle = createGlobalStyle`
     --Error: #EE4266;
     --Sucess: #52CA76;
     --Warning: #F6AA1C;
+    --Attention: #E7FF86;
+    --Special_Blue: #D8E3F2;
 //---------------------------------------------------------------
 
     //Grays Scale
@@ -33,6 +35,16 @@ export const GlobalStyle = createGlobalStyle`
     --Light_Gray_2:#CCCCCC;
     --Light_Gray_3: #F5F5F5;
     --White: #FFFFFF;
+
+    //Shadows
+    --Slaved: 0px 4px 25px 0px rgba(0, 0, 0, 0.15);
+
+    //spacing:
+    --Large-spaced: 1px;
+    --Short-spaced: .75px;
+
+    //Border Radius
+    --Pill-Rounded: 29px;
   }
 `;
 

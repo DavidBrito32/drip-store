@@ -1,19 +1,31 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, NavigateFunction, useNavigate } from "react-router-dom";
 import styled, { IStyledComponent } from "styled-components";
 import { FiShoppingCart } from "react-icons/fi";
 import { IoIosSearch } from "react-icons/io";
 import { useState } from "react";
+import CartItems from "./cart-items/assets";
+
+interface Flags {
+  burger: boolean;
+  input: boolean;
+  cart: boolean;
+}
 
 const Header = (): JSX.Element => {
-  const [flags, setFlags] = useState({
+  const [flags, setFlags] = useState<Flags>({
     burger: false,
     input: false,
+    cart: false,
   });
 
+  const navigate: NavigateFunction = useNavigate();
+
   const mudaBurger = () =>
-    setFlags({ ...flags, burger: !flags.burger, input: false });
+    setFlags({ ...flags, burger: !flags.burger, input: false, cart: false });
   const mudaInput = () =>
-    setFlags({ ...flags, input: !flags.input, burger: false });
+    setFlags({ ...flags, input: !flags.input, burger: false, cart: false });
+  const mudaCart = () =>
+    setFlags({ ...flags, cart: !flags.cart, burger: false, input: false });
 
   return (
     <>
@@ -42,13 +54,33 @@ const Header = (): JSX.Element => {
         <div
           className={flags.burger ? "action-button active" : "action-button"}
         >
-          <Link to={"/log-out"}>Cadastre-se</Link>
-          <button>Entrar</button>
+          <Link to={"/logout"}>Cadastre-se</Link>
+          <button onClick={() => navigate("/login")}>Entrar</button>
         </div>
 
         <div className="cart">
-          <FiShoppingCart className={"cart-icon"} />
-          <span />
+          <FiShoppingCart onClick={mudaCart} className={"cart-icon"} />
+          <span>1</span>
+
+          <div className={flags.cart ? "cart-items active" : "cart-items"}>
+            <h3>Meu Carrinho</h3>
+            <ul>
+              <CartItems />
+              <CartItems />
+              <CartItems />
+              <CartItems />
+              <CartItems />
+              <CartItems />
+              <CartItems />
+            </ul>
+            <h3>
+              Valor total: <span>R$ 219,00</span>
+            </h3>
+            <div className="btns">
+              <p>Esvaziar</p>
+              <button>Ver Carrinho</button>
+            </div>
+          </div>
         </div>
 
         <nav className={flags.burger ? "active" : ""}>
@@ -272,9 +304,112 @@ const HeaderContainer: IStyledComponent<"web"> = styled.header`
       transition-duration: 0.2s;
       &:hover {
         scale: 1.1;
+        & + span {
+          scale: 1.1;
+        }
       }
       &:active {
         scale: 0.9;
+        & + span {
+          scale: 0.9;
+        }
+      }
+    }
+
+    & span {
+      position: absolute;
+      line-height: 16px;
+      min-width: 16px;
+      top: -4px;
+      left: 22px;
+      font-weight: bold;
+      border-radius: 50%;
+      background-color: var(--Primary);
+      padding: 0 4px;
+      font-size: 10px;
+      border-radius: 10px;
+      text-align: center;
+      color: white;
+      transition-duration: 0.2s;
+    }
+
+    & .cart-items {
+      width: 320px;
+      height: 0;
+      position: absolute;
+      top: 60px;
+      right: 0;
+      background-color: black;
+      border-radius: 4px;
+      background: #fff;
+      box-shadow: var(--Slaved);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      visibility: hidden;
+      opacity: 0;
+      transition-duration: 0.4s;
+      overflow: hidden;
+      z-index: 2;
+
+      &.active {
+        visibility: visible;
+        opacity: 1;
+        height: 450px;
+      }
+
+      & h3 {
+        color: var(--Dark_Gray_2);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        & span{
+          position: static;
+          background-color: transparent;
+          font-size: 16px;
+          font-weight: 700;
+          color: var(--Primary);
+          }
+      }
+
+      & ul {
+        width: 100%;
+        height: 246px;
+        padding: 20px 0;
+        overflow-y: auto;
+        border-top: 2px solid var(--Dark_Gray_2);
+        border-bottom: 2px solid var(--Dark_Gray_2);
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      & .btns {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        & p {
+          display: inline;
+          text-decoration: underline;
+          text-underline-offset: 3px;
+          cursor: pointer;
+        }
+
+        & button {
+          width: 125px;
+          height: 40px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: var(--Primary);
+          border-radius: 8px;
+          border: none;
+          outline: none;
+          color: white;
+          font-weight: bolder;
+        }
       }
     }
   }
@@ -397,7 +532,7 @@ const HeaderContainer: IStyledComponent<"web"> = styled.header`
     & .action-button {
       position: absolute;
       bottom: -850%;
-      z-index: 1;
+      z-index: 13;
       width: 0%;
       visibility: hidden;
       opacity: 0;
@@ -430,6 +565,10 @@ const HeaderContainer: IStyledComponent<"web"> = styled.header`
       right: 20px;
       width: 25px;
       height: 25px;
+
+      & .cart-items {
+        right: 50%;
+      }
     }
 
     & nav {
@@ -442,6 +581,7 @@ const HeaderContainer: IStyledComponent<"web"> = styled.header`
       background-color: white;
       visibility: hidden;
       opacity: 0;
+      z-index: 10;
 
       &::before {
         content: "";

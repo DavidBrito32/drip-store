@@ -1,0 +1,67 @@
+{
+    "banners" : [
+        {
+            "id": 1,
+            "supTitle": "Melhores ofertas personalizadas",
+            "title": "Queima de stoque Nike 🔥",
+            "description": "Consequat culpa exercitation mollit nisi excepteur do do tempor laboris eiusmod irure consectetur.",
+            "ctaButtonText": "Ver Ofertas",
+            "ctaButtonColor": "#C92071",
+            "imageBanner": "https://github.com/DavidBrito32/digital_store/blob/main/src/components/Caroussel/assets/Caroussel/Tenis1.png?raw=true"
+        },
+        {
+            "id": 2,
+            "supTitle": "Exclusividade só aqui",
+            "title": "Nike T-SHORT Evolution 🔥",
+            "description": "Consequat culpa exercitation mollit nisi excepteur do do tempor laboris eiusmod irure consectetur.",
+            "ctaButtonText": "Ver Ofertas",
+            "ctaButtonColor": "#C92071",
+            "imageBanner": "https://github.com/DavidBrito32/digital_store/blob/main/src/components/Caroussel/assets/Caroussel/Tenis2.png?raw=true"
+        },
+        {
+            "id": 3,
+            "supTitle": "Evolução em Tênis",
+            "title": "Nike Premium Edition 🔥",
+            "description": "Consequat culpa exercitation mollit nisi excepteur do do tempor laboris eiusmod irure consectetur.",
+            "ctaButtonText": "Ver Ofertas",
+            "ctaButtonColor": "#C92071",
+            "imageBanner": "https://github.com/DavidBrito32/digital_store/blob/main/src/components/Caroussel/assets/Caroussel/Tenis3.png?raw=true"
+        },
+        {
+            "id": 4,
+            "supTitle": "Evolução em Tênis",
+            "title": "Nike Premium Edition 🔥",
+            "description": "Consequat culpa exercitation mollit nisi excepteur do do tempor laboris eiusmod irure consectetur.",
+            "ctaButtonText": "Ver Ofertas",
+            "ctaButtonColor": "#C92071",
+            "imageBanner": "https://github.com/DavidBrito32/digital_store/blob/main/src/components/Caroussel/assets/Caroussel/Tenis2.png?raw=true"
+        },
+        {
+            "id": 5,
+            "supTitle": "Evolução em Tênis",
+            "title": "Nike Premium Edition 🔥",
+            "description": "Consequat culpa exercitation mollit nisi excepteur do do tempor laboris eiusmod irure consectetur.",
+            "ctaButtonText": "Ver Ofertas",
+            "ctaButtonColor": "#C92071",
+            "imageBanner": "https://github.com/DavidBrito32/digital_store/blob/main/src/components/Caroussel/assets/Caroussel/Tenis3.png?raw=true"
+        },
+        {
+            "id": 6,
+            "supTitle": "Evolução em Tênis",
+            "title": "Nike Premium Edition 🔥",
+            "description": "Consequat culpa exercitation mollit nisi excepteur do do tempor laboris eiusmod irure consectetur.",
+            "ctaButtonText": "Ver Ofertas",
+            "ctaButtonColor": "#C92071",
+            "imageBanner": "https://github.com/DavidBrito32/digital_store/blob/main/src/components/Caroussel/assets/Caroussel/Tenis2.png?raw=true"
+        },
+        {
+            "id": 7,
+            "supTitle": "Evolução em Tênis",
+            "title": "Nike Premium Edition 🔥",
+            "description": "Consequat culpa exercitation mollit nisi excepteur do do tempor laboris eiusmod irure consectetur.",
+            "ctaButtonText": "Ver Ofertas",
+            "ctaButtonColor": "#C92071",
+            "imageBanner": "https://github.com/DavidBrito32/digital_store/blob/main/src/components/Caroussel/assets/Caroussel/Tenis1.png?raw=true"
+        }
+    ]
+}

@@ -1,15 +1,16 @@
 import { Outlet } from "react-router-dom";
-import Header from "../../components/header";
+import HeaderAuth from "../../components/headerAuth";
 import Footer from "../../components/footer";
 
-const PublicLayout = (): JSX.Element => {
+
+const AuthLayout = (): JSX.Element => {
     return (
         <>
-            <Header />
+            <HeaderAuth />
             <Outlet />
             <Footer />
         </>
     );
 };
 
-export default PublicLayout;
+export default AuthLayout;
