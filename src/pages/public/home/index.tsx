@@ -1,4 +1,4 @@
-import styled, { IStyledComponent } from "styled-components";
+import styled from "styled-components";
 import Carrousel from "../../../components/carrousel";
 import Colecoes from "../../../components/colecoes_em_destaque";
 import ProductsDestaque from "../../../components/products-destaque";
@@ -17,7 +17,7 @@ const Home = (): JSX.Element => {
      );
 };
 
-const ContainerHome: IStyledComponent<"web"> = styled.main`
+const ContainerHome = styled.main`
 
 `;
 

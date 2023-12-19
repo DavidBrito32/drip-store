@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useAxios } from "../../hooks/useAxios";
 import { useState } from "react";
-import { IStyledComponent, Substitute } from "styled-components/dist/types";
+import { BASE_URL } from "../../constants/BASE_URL";
 interface StyleProps {
   $largura?: number;
   $slide?: number;
@@ -22,26 +22,30 @@ type Banner = {
 
 const Carrousel = () => {
   const [slide, setSlide] = useState<number>(0);
-  const { data } = useAxios<Banner>("http://localhost:3000/banners");
+  const { data, loading, error } = useAxios<Banner>(`${BASE_URL}banners`);
+
   return (
     <>
       <Container>
         <Items $largura={data.length} $slide={slide}>
-          {data.map(
-            (item: Banner): JSX.Element => (
-              <Item key={item.id}>
-                <Conteudo>
-                  <SupTitle>{item.supTitle}</SupTitle>
-                  <Title>{item.title}</Title>
-                  <Description>{item.description}</Description>
-                  <Button $ctaColor={item.ctaButtonColor}>Ver Ofertas</Button>
-                </Conteudo>
-                <FigureImage src={item.imageBanner} alt="Tenis" />
-              </Item>
-            )
-          )}
+          {data !== undefined &&
+            data.map(
+              (item: Banner): JSX.Element => (
+                <Item key={item.id}>
+                  <Conteudo>
+                    <SupTitle>{item.supTitle}</SupTitle>
+                    <Title>{item.title}</Title>
+                    <Description>{item.description}</Description>
+                    <Button $ctaColor={item.ctaButtonColor}>Ver Ofertas</Button>
+                  </Conteudo>
+                  <FigureImage src={item.imageBanner} alt="Tenis" />
+                </Item>
+              )
+            )}
         </Items>
         <CarousselPagination>
+          {loading && <h1>Carregando Dados ...</h1>}
+          {error && <h1>{error}</h1>}
           {data.map(
             (_item: Banner, index: number): JSX.Element => (
               <CarousselPaginationPill
@@ -57,16 +61,7 @@ const Carrousel = () => {
   );
 };
 
-const Container: IStyledComponent<
-  "web",
-  Substitute<
-    React.DetailedHTMLProps<
-      React.HTMLAttributes<HTMLDivElement>,
-      HTMLDivElement
-    >,
-    StyleProps
-  >
-> = styled.div`
+const Container = styled.div<StyleProps>`
   position: relative;
   background-color: var(--Light_Gray_3);
   padding: 80px 0;
@@ -77,16 +72,7 @@ const Container: IStyledComponent<
   }
 `;
 
-const Items: IStyledComponent<
-  "web",
-  Substitute<
-    React.DetailedHTMLProps<
-      React.HTMLAttributes<HTMLDivElement>,
-      HTMLDivElement
-    >,
-    StyleProps
-  >
-> = styled.div<StyleProps>`
+const Items = styled.div<StyleProps>`
   display: flex;
   width: calc(100vw * ${(props) => props.$largura || 1});
   position: relative;
@@ -94,16 +80,7 @@ const Items: IStyledComponent<
   transition-duration: 400ms;
 `;
 
-const Item: IStyledComponent<
-  "web",
-  Substitute<
-    React.DetailedHTMLProps<
-      React.HTMLAttributes<HTMLDivElement>,
-      HTMLDivElement
-    >,
-    StyleProps
-  >
-> = styled.div<StyleProps>`
+const Item = styled.div<StyleProps>`
   display: flex;
   align-items: center;
   padding: 0 100px;
@@ -119,16 +96,7 @@ const Item: IStyledComponent<
   }
 `;
 
-const Conteudo: IStyledComponent<
-  "web",
-  Substitute<
-    React.DetailedHTMLProps<
-      React.HTMLAttributes<HTMLDivElement>,
-      HTMLDivElement
-    >,
-    StyleProps
-  >
-> = styled.div`
+const Conteudo = styled.div<StyleProps>`
   width: 45%;
   padding: 0 30px;
   @media only screen and (max-width: 768px) {
@@ -137,16 +105,7 @@ const Conteudo: IStyledComponent<
   }
 `;
 
-const SupTitle: IStyledComponent<
-  "web",
-  Substitute<
-    React.DetailedHTMLProps<
-      React.HTMLAttributes<HTMLHeadElement>,
-      HTMLDivElement
-    >,
-    StyleProps
-  >
-> = styled.h6`
+const SupTitle = styled.h6<StyleProps>`
   font-weight: bold;
   font-size: 16px;
   line-height: 24px;
@@ -162,16 +121,7 @@ const SupTitle: IStyledComponent<
   }
 `;
 
-const Title: IStyledComponent<
-  "web",
-  Substitute<
-    React.DetailedHTMLProps<
-      React.HTMLAttributes<HTMLHeadElement>,
-      HTMLDivElement
-    >,
-    StyleProps
-  >
-> = styled.h2`
+const Title = styled.h2<StyleProps>`
   font-weight: 800;
   font-size: 64px;
   line-height: 66px;
@@ -189,16 +139,7 @@ const Title: IStyledComponent<
   }
 `;
 
-const Description: IStyledComponent<
-  "web",
-  Substitute<
-    React.DetailedHTMLProps<
-      React.HTMLAttributes<HTMLParagraphElement>,
-      HTMLDivElement
-    >,
-    StyleProps
-  >
-> = styled.p`
+const Description = styled.p<StyleProps>`
   font-size: 18px;
   line-height: 34px;
   letter-spacing: var(--letter-spacing);
@@ -211,16 +152,7 @@ const Description: IStyledComponent<
   }
 `;
 
-const Button: IStyledComponent<
-  "web",
-  Substitute<
-    React.DetailedHTMLProps<
-      React.HTMLAttributes<HTMLButtonElement>,
-      HTMLButtonElement
-    >,
-    StyleProps
-  >
-> = styled.button`
+const Button = styled.button<StyleProps>`
   width: 220px;
   height: 48px;
   border-radius: 5px;
@@ -240,16 +172,7 @@ const Button: IStyledComponent<
   }
 `;
 
-const FigureImage: IStyledComponent<
-  "web",
-  Substitute<
-    React.DetailedHTMLProps<
-      React.HTMLAttributes<HTMLImageElement>,
-      HTMLDivElement
-    >,
-    StyleProps
-  >
-> = styled.img`
+const FigureImage = styled.img<StyleProps>`
   transform: rotate(-10deg);
   flex: 1;
   object-fit: none;
@@ -273,16 +196,7 @@ const FigureImage: IStyledComponent<
   }
 `;
 
-const CarousselPagination: IStyledComponent<
-  "web",
-  Substitute<
-    React.DetailedHTMLProps<
-      React.HTMLAttributes<HTMLDivElement>,
-      HTMLDivElement
-    >,
-    StyleProps
-  >
-> = styled.div`
+const CarousselPagination = styled.div<StyleProps>`
   display: flex;
   gap: 16px;
   position: absolute;
@@ -291,16 +205,7 @@ const CarousselPagination: IStyledComponent<
   transform: translateX(-50%);
 `;
 
-const CarousselPaginationPill: IStyledComponent<
-  "web",
-  Substitute<
-    React.DetailedHTMLProps<
-      React.HTMLAttributes<HTMLDivElement>,
-      HTMLDivElement
-    >,
-    StyleProps
-  >
-> = styled.div<StyleProps>`
+const CarousselPaginationPill = styled.div<StyleProps>`
   width: 16px;
   height: 16px;
   border-radius: 50%;

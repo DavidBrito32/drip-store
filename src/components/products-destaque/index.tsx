@@ -32,14 +32,14 @@ const ContainerProd = styled.div`
   background-color: var(--Light_Gray_3);
 
   @media only screen and (max-width: 480px) {
-    padding: 0 10px;
+    padding: 50px 10px;
   }
   @media only screen and (min-width: 480px) and (max-width: 768px) {
     padding: 0 10px;
   }
 
   @media only screen and (min-width: 769px) and (max-width: 1499px){
-    padding: 0 10px;
+    padding: 38px 10px 100px;
   }
 `;
 

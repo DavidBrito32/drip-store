@@ -1,7 +1,8 @@
-import styled, { IStyledComponent } from "styled-components";
+import styled from "styled-components";
 import Card1 from "./cards1";
 import Card2 from "./cards2";
 import { useAxios } from "../../hooks/useAxios";
+import { BASE_URL } from "../../constants/BASE_URL";
 
 interface RequestData {
   id: number;
@@ -10,7 +11,9 @@ interface RequestData {
 }
 
 const Colecoes = (): JSX.Element => {
-  const { data } = useAxios<RequestData>("http://localhost:3000/categorias");
+  const { data, loading, error } = useAxios<RequestData>(
+    `${BASE_URL}categorias`
+  );
 
   return (
     <>
@@ -25,6 +28,8 @@ const Colecoes = (): JSX.Element => {
         <SupTitle>{"Categorias em destaque"}</SupTitle>
 
         <ListaIcones>
+          {loading && <h1>Carregando Dados . . .</h1>}
+          {error && <h1>{error}</h1>}
           {data.map((item: RequestData) => (
             <Card2 key={item.id} image={item.image} titulo={item.title} />
           ))}
@@ -34,7 +39,7 @@ const Colecoes = (): JSX.Element => {
   );
 };
 
-const ContainerColecoes: IStyledComponent<"web"> = styled.div`
+const ContainerColecoes = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -45,12 +50,12 @@ const ContainerColecoes: IStyledComponent<"web"> = styled.div`
     padding: 34px 10px;
   }
 `;
-const Title: IStyledComponent<"web"> = styled.h3`
+const Title = styled.h3`
   font-size: 24px;
   font-weight: bold;
   color: var(--Dark_Gray_2);
 `;
-const SupTitle: IStyledComponent<"web"> = styled.h3`
+const SupTitle = styled.h3`
   font-size: 24px;
   font-weight: bold;
   color: var(--Dark_Gray_2);
@@ -58,8 +63,7 @@ const SupTitle: IStyledComponent<"web"> = styled.h3`
   margin-top: 100px;
   margin-bottom: 20px;
 `;
-
-const ListaCards: IStyledComponent<"web"> = styled.ul`
+const ListaCards = styled.ul`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -67,7 +71,7 @@ const ListaCards: IStyledComponent<"web"> = styled.ul`
   align-items: center;
   justify-content: center;
 `;
-const ListaIcones: IStyledComponent<"web"> = styled.ul`
+const ListaIcones = styled.ul`
   width: 100%;
   display: flex;
   flex-wrap: nowrap;

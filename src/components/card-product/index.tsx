@@ -5,12 +5,21 @@ interface StyledProps {
   alt?: string;
 }
 
-const CardProduct = () => {
+type Props = {
+  discount?: string,
+  image?: string,
+  category?: string,
+  price?: number,
+  oldPrice?: number
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const CardProduct = (_props: Props) => {
   return (
     <>
       <ContainerProd>
         <ContainerImage>
-          <Pill>30% OFF</Pill>
+          <Pill>{"30% OFF"}</Pill>
           <Image
             src={
               "https://cdnv2.moovin.com.br/atitudeesportes/imagens/produtos/det/tenis-nike-revolution-6-next-nature-ae3e5df45b9645eab909ce5293ca7a27.jpeg"
@@ -29,7 +38,7 @@ const CardProduct = () => {
   );
 };
 
-const ContainerProd = styled.li`
+const ContainerProd = styled.li<StyledProps>`
   width: 292px;
   display: flex;
   flex-direction: column;
@@ -42,7 +51,7 @@ const ContainerProd = styled.li`
   }
 `;
 
-const ContainerImage = styled.div`
+const ContainerImage = styled.div<StyledProps>`
   width: 100%;
   height: 320px;
   display: flex;
@@ -57,7 +66,7 @@ const ContainerImage = styled.div`
   }
 `;
 
-const Pill = styled.span`
+const Pill = styled.span<StyledProps>`
   width: 96px;
   height: 32px;
   border-radius: var(--Pill-Rounded);
@@ -84,7 +93,7 @@ const Image = styled.img<StyledProps>`
   object-fit: contain;
 `;
 
-const Category = styled.h3`
+const Category = styled.h3<StyledProps>`
   font-size: 12px;
   font-weight: 700;
   line-height: 24px;
@@ -93,7 +102,7 @@ const Category = styled.h3`
   margin-top: 18px;
 `;
 
-const TitleProduct = styled.h1`
+const TitleProduct = styled.h1<StyledProps>`
   font-size: 24px;
   font-weight: 400;
   line-height: 38px;
@@ -108,12 +117,12 @@ const TitleProduct = styled.h1`
   }
 `;
 
-const ContainerPrice = styled.div`
+const ContainerPrice = styled.div<StyledProps>`
   display: flex;
   gap: 12px;
 `;
 
-const Price = styled.h3`
+const Price = styled.h3<StyledProps>`
   font-size: 24px;
   font-weight: 700;
   line-height: 38px;
@@ -125,7 +134,7 @@ const Price = styled.h3`
   }
 `;
 
-const Discount = styled.span`
+const Discount = styled.span<StyledProps>`
   font-size: 24px;
   font-weight: 400;
   line-height: 38px;

@@ -1,6 +1,5 @@
-import styled, { IStyledComponent } from "styled-components";
+import styled from "styled-components";
 import Banner from "./assets/Banner-Rodape.svg";
-import { Substitute } from "styled-components/dist/types";
 
 interface StyledProps {
   src?: string;
@@ -29,7 +28,7 @@ const BannerRodape = (): JSX.Element => {
   );
 };
 
-const ContainerRodape = styled.div`
+const ContainerRodape = styled.div<StyledProps>`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -51,7 +50,7 @@ const ContainerRodape = styled.div`
 
 `;
 
-const ContainerImage: IStyledComponent<"web"> = styled.div`
+const ContainerImage = styled.div<StyledProps>`
   width: 50%;
   height: auto;
   position: relative;
@@ -97,7 +96,7 @@ const ContainerImage: IStyledComponent<"web"> = styled.div`
 
 `;
 
-const Picture: IStyledComponent<"web", Substitute<React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>, StyledProps>> = styled.img<StyledProps>`
+const Picture = styled.img<StyledProps>`
   width: 95%;
   position: relative;
   object-fit: contain;
@@ -116,7 +115,7 @@ const Picture: IStyledComponent<"web", Substitute<React.DetailedHTMLProps<React.
   }
 `;
 
-const Infos: IStyledComponent<"web"> = styled.div`
+const Infos = styled.div<StyledProps>`
   width: 50%;
   display: flex;
   flex-direction: column;
@@ -138,7 +137,7 @@ const Infos: IStyledComponent<"web"> = styled.div`
   
 `;
 
-const SupTitle: IStyledComponent<"web"> = styled.h3`
+const SupTitle = styled.h3<StyledProps>`
   font-size: 14px;
   font-weight: 700;
   line-height: 22px;
@@ -149,7 +148,7 @@ const SupTitle: IStyledComponent<"web"> = styled.h3`
   }
 `;
 
-const Title: IStyledComponent<"web"> = styled.h1`
+const Title = styled.h1<StyledProps>`
   font-size: 48px;
   font-weight: 700;
   line-height: 50px;
@@ -164,7 +163,7 @@ const Title: IStyledComponent<"web"> = styled.h1`
   }
 `;
 
-const Description: IStyledComponent<"web"> = styled.p`
+const Description = styled.p<StyledProps>`
   font-family: Inter;
   font-size: 16px;
   font-weight: 400;
@@ -179,7 +178,7 @@ const Description: IStyledComponent<"web"> = styled.p`
   }
 `;
 
-const Button: IStyledComponent<"web"> = styled.button`
+const Button = styled.button<StyledProps>`
   width: 200px;
   height: 40px;
   border-radius: var(--Rounded_Default);
