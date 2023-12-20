@@ -520,6 +520,8 @@ const HeaderContainer = styled.header`
           top: 80%;
           visibility: visible;
           opacity: 1;
+          z-index: 10000;
+          box-shadow: var(--Slaved);
         }
       }
 
@@ -530,8 +532,8 @@ const HeaderContainer = styled.header`
 
     & .action-button {
       position: absolute;
-      bottom: -850%;
-      z-index: 13;
+      bottom: -650%;
+      z-index: 101;
       width: 0%;
       visibility: hidden;
       opacity: 0;
@@ -707,8 +709,8 @@ const HeaderContainer = styled.header`
 
     & .action-button {
       position: absolute;
-      bottom: -850%;
-      z-index: 1;
+      bottom: -550%;
+      z-index: 101;
       width: 0%;
       visibility: hidden;
       opacity: 0;
@@ -753,6 +755,7 @@ const HeaderContainer = styled.header`
       background-color: white;
       visibility: hidden;
       opacity: 0;
+      z-index: 100;
 
       &::before {
         content: "";

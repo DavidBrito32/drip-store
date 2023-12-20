@@ -17,6 +17,7 @@ const PublicLayout = (): JSX.Element => {
 
 const ContainerLayout = styled.div`
   min-height: 100vh;
+  overflow-x: hidden;
 `;
 
 export default PublicLayout;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Tenis from './assets/Tenis.svg'
 
 interface StyledProps {
   src?: string;
@@ -22,7 +23,7 @@ const CardProduct = (_props: Props) => {
           <Pill>{"30% OFF"}</Pill>
           <Image
             src={
-              "https://cdnv2.moovin.com.br/atitudeesportes/imagens/produtos/det/tenis-nike-revolution-6-next-nature-ae3e5df45b9645eab909ce5293ca7a27.jpeg"
+              Tenis
             }
             alt={"Imagem"}
           />
@@ -58,7 +59,7 @@ const ContainerImage = styled.div<StyledProps>`
   justify-content: center;
   align-items: center;
   position: relative;
-  background-color: var(--Light_Gray_3);
+  background-color: var(--White);
   transition-duration: .1s;
 
   @media only screen and (max-width: 480px) {
@@ -89,7 +90,6 @@ const Pill = styled.span<StyledProps>`
 
 const Image = styled.img<StyledProps>`
   display: block;
-  width: 90%;
   object-fit: contain;
 `;
 
