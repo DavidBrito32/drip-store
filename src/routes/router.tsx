@@ -7,6 +7,7 @@ import MyOrders from "../pages/public/my-orders";
 import LoginPage from "../pages/auth/login-page";
 import AuthLayout from "../layouts/auth";
 import Logout from "../pages/auth/logout";
+import ProductsDetails from "../components/products_details";
 
 const Router = (): JSX.Element => {
   return (
@@ -15,16 +16,14 @@ const Router = (): JSX.Element => {
         <Route path="/" element={<PublicLayout />}>
           <Route index element={<Home />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/products/details" element={<ProductsDetails />} />
           <Route path="/category" element={<Category />} />
           <Route path="/my-order" element={<MyOrders />} />
         </Route>
 
-        <Route path="/login" element={<AuthLayout />}>
-          <Route index element={<LoginPage />} />
-        </Route>
-
-        <Route path="/logout" element={<AuthLayout />}>
-          <Route index element={<Logout />} />
+        <Route path="/auth" element={<AuthLayout />}>
+          <Route path="/auth/login"element={<LoginPage />} />
+          <Route path="/auth/logout" element={<Logout />} />
         </Route>
       </Routes>
     </BrowserRouter>

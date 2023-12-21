@@ -19,6 +19,7 @@ export const GlobalStyle = createGlobalStyle`
     --Primary_G: linear-gradient(180deg, #C92071 0%, #EDABCA 100%);
     --Secundary: #B5B6F2;
     --Secundary_G: linear-gradient(180deg, #B5B6F2 0%, #EFEFFF 70%, transparent);
+    --Secundary_Gradient: linear-gradient(180deg, #B5B6F2 0%, #EFEFFF 100%);
     --Tertiary: #991956;
     --Error: #EE4266;
     --Sucess: #52CA76;

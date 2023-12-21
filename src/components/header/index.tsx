@@ -54,8 +54,8 @@ const Header = (): JSX.Element => {
         <div
           className={flags.burger ? "action-button active" : "action-button"}
         >
-          <Link to={"/logout"}>Cadastre-se</Link>
-          <button onClick={() => navigate("/login")}>Entrar</button>
+          <Link to={"/auth/logout"}>Cadastre-se</Link>
+          <button onClick={() => navigate("/auth/login")}>Entrar</button>
         </div>
 
         <div className="cart">
@@ -90,9 +90,6 @@ const Header = (): JSX.Element => {
             </li>
             <li>
               <NavLink to={"/products"}>Produtos</NavLink>
-            </li>
-            <li>
-              <NavLink to={"/category"}>Categorias</NavLink>
             </li>
             <li>
               <NavLink to={"/my-order"}>Meus Produtos</NavLink>

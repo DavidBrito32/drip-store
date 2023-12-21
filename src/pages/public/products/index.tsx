@@ -32,7 +32,7 @@ const Products = (): JSX.Element => {
         </Heading>
 
         <Filtro className={flags.filter ? "active" : ""}>
-            <span onClick={toogleFilter}>X</span>
+          <span onClick={toogleFilter}>X</span>
           <FilterProduct />
         </Filtro>
 
@@ -77,11 +77,10 @@ const ContainerProducts = styled.div`
     padding: 20px 10px 140px;
   }
 
-  @media only screen and (min-width: 769px) and (max-width: 1500px){
+  @media only screen and (min-width: 769px) and (max-width: 1500px) {
     padding: 20px 20px 140px;
   }
-  
-  `;
+`;
 
 const Heading = styled.div`
   width: 100%;
@@ -90,7 +89,7 @@ const Heading = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
 
-  @media only screen and (max-width: 390px){
+  @media only screen and (max-width: 390px) {
     gap: 0;
   }
 
@@ -102,10 +101,9 @@ const Heading = styled.div`
 `;
 
 const Filtro = styled.div`
-    & span{
-        display: none;
-    }
-
+  & span {
+    display: none;
+  }
 
   @media only screen and (max-width: 480px) {
     position: absolute;
@@ -116,22 +114,23 @@ const Filtro = styled.div`
     visibility: hidden;
     opacity: 0;
 
-        & span {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            top: 3.5%;
-            right: 10%;
-            font-size: 20px;
-                &:hover, &:active{
-                    background-color: var(--Primary);
-                    color: white;
-                }
-        }
+    & span {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 3.5%;
+      right: 10%;
+      font-size: 20px;
+      &:hover,
+      &:active {
+        background-color: var(--Primary);
+        color: white;
+      }
+    }
 
     &::after {
       content: "";
@@ -151,7 +150,6 @@ const Filtro = styled.div`
     }
   }
 
-  
   @media only screen and (min-width: 481px) and (max-width: 768px) {
     position: absolute;
     z-index: 10;
@@ -161,22 +159,23 @@ const Filtro = styled.div`
     visibility: hidden;
     opacity: 0;
 
-        & span {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            top: 3.5%;
-            right: 25%;
-            font-size: 20px;
-                &:hover, &:active{
-                    background-color: var(--Primary);
-                    color: white;
-                }
-        }
+    & span {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 3.5%;
+      right: 25%;
+      font-size: 20px;
+      &:hover,
+      &:active {
+        background-color: var(--Primary);
+        color: white;
+      }
+    }
 
     &::after {
       content: "";
@@ -223,7 +222,7 @@ const SelectOptions = styled.select`
     border-color: var(--Primary);
   }
 
-  @media only screen and (max-width: 390px){
+  @media only screen and (max-width: 390px) {
     width: 80%;
   }
 `;
@@ -265,7 +264,7 @@ const BtnFilter = styled.div`
     scale: 0.9;
   }
 
-  @media only screen and (max-width: 390px){
+  @media only screen and (max-width: 390px) {
     width: 50px;
     height: 50px;
   }

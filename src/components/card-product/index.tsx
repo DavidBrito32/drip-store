@@ -91,6 +91,10 @@ const Pill = styled.span<StyledProps>`
 const Image = styled.img<StyledProps>`
   display: block;
   object-fit: contain;
+
+  @media only screen and (max-width: 480px){
+    width: 100%;
+  }
 `;
 
 const Category = styled.h3<StyledProps>`
