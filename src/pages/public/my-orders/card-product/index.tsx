@@ -210,9 +210,9 @@ const Valor = styled.h1`
   line-height: 24px;
   letter-spacing: 0.75px;
   color: var(--Dark_Gray_2);
-    @media only screen and (max-width: 480px){
-        width: 30%;
-    }
+  @media only screen and (max-width: 480px) {
+    width: 30%;
+  }
 `;
 
 export default CardProductCart;

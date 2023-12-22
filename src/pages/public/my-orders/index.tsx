@@ -260,9 +260,9 @@ const Subtotal = styled.div`
     line-height: 22px;
     letter-spacing: 1px;
     text-align: right;
-      &:hover{
-        text-decoration: underline;
-      }
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   & button {
