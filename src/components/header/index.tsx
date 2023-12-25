@@ -78,7 +78,7 @@ const Header = (): JSX.Element => {
             </h3>
             <div className="btns">
               <p>Esvaziar</p>
-              <button>Ver Carrinho</button>
+              <button onClick={() => navigate("/my-order")} >Ver Carrinho</button>
             </div>
           </div>
         </div>
