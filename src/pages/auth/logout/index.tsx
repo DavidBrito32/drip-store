@@ -140,7 +140,12 @@ const Input = styled.input<StyledProps>`
   letter-spacing: var(--Short-spaced);
   color: var(--Dark_Gray_3);
   padding-left: 20px;
-  border: none;
+  border: 1px solid transparent;
+  transition-duration: .4s;
+
+    &:focus{
+      border: 1px solid var(--Primary);
+    }
 `;
 
 const ButtonAction = styled.button`

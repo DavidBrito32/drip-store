@@ -8,6 +8,7 @@ import LoginPage from "../pages/auth/login-page";
 import AuthLayout from "../layouts/auth";
 import Logout from "../pages/auth/logout";
 import ProductsDetails from "../components/products_details";
+import DashboardPage from "../pages/admin/dashboard";
 
 const Router = (): JSX.Element => {
   return (
@@ -25,6 +26,8 @@ const Router = (): JSX.Element => {
           <Route path="/auth/login"element={<LoginPage />} />
           <Route path="/auth/logout" element={<Logout />} />
         </Route>
+        <Route path="/dashboard" element={<DashboardPage />} />
+        
       </Routes>
     </BrowserRouter>
   );

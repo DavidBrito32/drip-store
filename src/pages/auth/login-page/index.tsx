@@ -32,7 +32,8 @@ const LoginPage = () => {
         <FormLogin>
           <Title>Acesse sua conta</Title>
           <Text>
-            Novo cliente? Então registre-se <Link to={"/auth/logout"}>aqui.</Link>
+            Novo cliente? Então registre-se{" "}
+            <Link to={"/auth/logout"}>aqui.</Link>
           </Text>
           <ContainerInput>
             <Label>
@@ -61,8 +62,8 @@ const LoginPage = () => {
         </FormLogin>
 
         <ContainerImage>
-            <Image className="left" src={sapato1} />
-            <Image className="right" src={sapato2} />
+          <Image className="left" src={sapato1} />
+          <Image className="right" src={sapato2} />
         </ContainerImage>
       </ContainerLogin>
     </>
@@ -77,15 +78,15 @@ const ContainerLogin = styled.div<StyledProps>`
   gap: 45px;
   align-items: center;
   padding: 0 100px;
-    
-    @media only screen and (max-width: 480px){
-        justify-content: center;
-        padding: 0 10px;
-    }
-    @media only screen and (max-width: 768px){
-        justify-content: center;
-        padding: 0 30px;
-    }
+
+  @media only screen and (max-width: 480px) {
+    justify-content: center;
+    padding: 0 10px;
+  }
+  @media only screen and (max-width: 768px) {
+    justify-content: center;
+    padding: 0 30px;
+  }
 `;
 
 const FormLogin = styled.form<StyledProps>`
@@ -97,10 +98,10 @@ const FormLogin = styled.form<StyledProps>`
   padding: 30px;
   border-radius: 4px;
 
-    @media only screen and (max-width: 480px){
-        width: 100%;
-        height: fit-content;
-    }
+  @media only screen and (max-width: 480px) {
+    width: 100%;
+    height: fit-content;
+  }
 `;
 
 const Title = styled.h3<StyledProps>`
@@ -164,7 +165,12 @@ const Input = styled.input<StyledProps>`
   letter-spacing: var(--Short-spaced);
   color: var(--Dark_Gray_3);
   padding-left: 20px;
-  border: none;
+  border: 1px solid transparent;
+  transition-duration: .2s;
+
+    &:focus{
+      border: 1px solid var(--Primary);
+    }
 `;
 
 const ResetPassword = styled.h3`
@@ -215,32 +221,31 @@ const LoginOptions = styled.h3`
   }
 `;
 
-
 const ContainerImage = styled.div`
-    width: 50%;
-    display: flex;
-    height: 100%;
-    position: relative;
+  width: 50%;
+  display: flex;
+  height: 100%;
+  position: relative;
 
-        @media only screen and (max-width: 768px){
-            display: none;
-        }
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const Image = styled.img`
-    width: 380px;
-    height: 583px;
-    object-fit: contain;
-        &.left{
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-        &.right{
-            position: absolute;
-            right: 0;
-            bottom: 0;
-        }
+  width: 380px;
+  height: 583px;
+  object-fit: contain;
+  &.left {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  &.right {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
 `;
 
 export default LoginPage;
