@@ -9,6 +9,8 @@ import AuthLayout from "../layouts/auth";
 import Logout from "../pages/auth/logout";
 import ProductsDetails from "../components/products_details";
 import DashboardPage from "../pages/admin/dashboard";
+import User from "../pages/admin/user";
+import ProductsDashboard from "../pages/admin/products";
 
 const Router = (): JSX.Element => {
   return (
@@ -26,7 +28,10 @@ const Router = (): JSX.Element => {
           <Route path="/auth/login"element={<LoginPage />} />
           <Route path="/auth/logout" element={<Logout />} />
         </Route>
-        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/dashboard" element={<DashboardPage />}>
+          <Route index element={<User />} />
+          <Route path="products" element={<ProductsDashboard />} />
+        </Route>
         
       </Routes>
     </BrowserRouter>
