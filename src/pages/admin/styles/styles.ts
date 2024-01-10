@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { FormsTypes } from "../types/types";
+import React from "react";
+import styled, { IStyledComponent } from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
@@ -30,6 +30,25 @@ export const SubTitle = styled.h3`
     color: var(--Dark_Gray);
     font-weight: bolder;
   }
+`;
+
+export const ErrorText = styled.h3`
+  width: 100%;
+  padding: 10px;
+  color: black;
+  background-color: #F72B0255;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 4px;
+`;
+export const SuccessText = styled.h3`
+  width: 100%;
+  padding: 10px;
+  color: black;
+  background-color: #02F71255;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 4px;
 `;
 
 export const BoxEdit = styled.div`
@@ -105,7 +124,7 @@ export const Btn = styled.button`
   }
 `;
 
-export const BtnAction = styled.button<FormsTypes>`
+export const BtnAction = styled.button`
   margin-top: 20px;
   width: 100%;
   height: 50px;
@@ -156,6 +175,18 @@ export const Table = styled.table`
     & td {
       font-size: 16px;
       font-weight: bold;
+      max-width: 250px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+
+      & img{
+        width: 150px;
+        height: 150px;
+        object-fit: contain;
+        display: block;
+        margin: 0 auto;
+      }
 
       &.userType {
         color: green;
@@ -172,7 +203,7 @@ export const Box = styled.div`
   align-items: center;
 `;
 
-export const Form = styled.form`
+export const Form: IStyledComponent<"web", FastOmit<React.DetailedHTMLProps<React.FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>, never>> = styled.form`
   width: 100%;
   max-height: 500px;
   overflow-y: auto;
@@ -208,7 +239,7 @@ export const Label = styled.label`
   }
 `;
 
-export const Input = styled.input<FormsTypes>`
+export const Input: IStyledComponent<"web", FastOmit<React.DetailedHTMLProps<React.FormHTMLAttributes<HTMLInputElement>, HTMLInputElement>, never>> = styled.input`
   width: 100%;
   height: 50px;
   border-radius: 8px;
@@ -232,7 +263,7 @@ export const Input = styled.input<FormsTypes>`
   }
 `;
 
-export const TextArea = styled.textarea<FormsTypes>`
+export const TextArea = styled.textarea`
   width: 100%;
   height: 100px;
   border-radius: 8px;
@@ -268,11 +299,4 @@ export const Select = styled.select`
   &:focus {
     border-color: var(--Primary);
   }
-`;
-
-export const ErrorText = styled.p`
-  width: 100%;
-  font-size: 16px;
-  color: red;
-  font-weight: 600;
 `;

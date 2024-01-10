@@ -51,7 +51,10 @@ const DashboardPage = (): JSX.Element => {
           </Logo>
 
           <ListMenu>
-            <Link to={"/dashboard"} className={location.pathname === "/dashboard" ? "active" : ""}>
+            <Link
+              to={"/dashboard"}
+              className={location.pathname === "/dashboard" ? "active" : ""}
+            >
               {" "}
               <FaUsers className="icon" />{" "}
               <span className={flags.openModal ? "" : "active"}>Usuarios</span>
@@ -66,7 +69,7 @@ const DashboardPage = (): JSX.Element => {
               <GiTatteredBanner className="icon" />{" "}
               <span className={flags.openModal ? "" : "active"}>Banners</span>
             </NavLink>
-            <NavLink to={"/dashboard/colecoes"}>
+            <NavLink to={"/dashboard/collections"}>
               {" "}
               <MdOutlineCollectionsBookmark className="icon" />{" "}
               <span className={flags.openModal ? "" : "active"}>Coleções</span>
@@ -181,6 +184,8 @@ const Title = styled.h2`
   font-size: 32px;
   font-weight: bold;
   color: var(--Dark_Gray_2);
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   &.active {
     width: 0px;
@@ -214,6 +219,8 @@ const ListMenu = styled.ul`
     color: var(--Dark_Gray_2);
     transition-duration: 0.2s;
     position: relative;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     cursor: pointer;
     & .icon {
       width: 30px;

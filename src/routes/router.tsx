@@ -11,6 +11,8 @@ import ProductsDetails from "../components/products_details";
 import DashboardPage from "../pages/admin/dashboard";
 import User from "../pages/admin/user";
 import ProductsDashboard from "../pages/admin/products";
+import Banners from "../pages/admin/banners";
+import Collections from "../pages/admin/collections";
 
 const Router = (): JSX.Element => {
   return (
@@ -31,6 +33,8 @@ const Router = (): JSX.Element => {
         <Route path="/dashboard" element={<DashboardPage />}>
           <Route index element={<User />} />
           <Route path="products" element={<ProductsDashboard />} />
+          <Route path="banners" element={<Banners />} />
+          <Route path="collections" element={<Collections />} />
         </Route>
         
       </Routes>

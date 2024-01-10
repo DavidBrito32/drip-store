@@ -5,9 +5,11 @@ import { FiXCircle } from "react-icons/fi";
 import { PiPasswordDuotone } from "react-icons/pi";
 import Modal from "../../../components/modal";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { TUser } from "./types/types";
 
 type FormsTypes = {
-  placeHolder?: string;
+  placeholder?: string;
   alt?: string;
   type?: string;
 };
@@ -36,6 +38,8 @@ const User = (): JSX.Element => {
     AdminType: false,
     OperatorType: true,
   });
+
+  const { register, handleSubmit, reset } = useForm<TUser>();
 
   const toogleUser = () =>
     setFlags({ ...flags, createUser: !flags.createUser });
@@ -103,19 +107,24 @@ const User = (): JSX.Element => {
             <FormUser>
               <Label>
                 {"Nome do usuario"}
-                <Input type="text" placeHolder="Digite o nome do usuario" />
+                <Input type="text" placeholder="Digite o nome do usuario"
+                {...register("user_name")}
+                />
                 <FaRegUser className="figure" />
               </Label>
               <Label>
                 {"E-mail do usuario"}
-                <Input type="text" placeHolder="Digite o email do usuario" />
+                <Input type="text" placeholder="Digite o email do usuario"
+                {...register("user_email")}
+                />
                 <MdOutlineMailOutline className="figure" />
               </Label>
               <Label>
                 {"Senha temporaria"}
                 <Input
                   type="text"
-                  placeHolder="Digite a senha temporaria do usuario"
+                  placeholder="Digite a senha temporaria do usuario"
+                  {...register("user_password")}
                 />
                 <PiPasswordDuotone className="figure" />
               </Label>
@@ -155,19 +164,19 @@ const User = (): JSX.Element => {
             <FormUser>
               <Label>
                 {"Nome do usuario"}
-                <Input type="text" placeHolder="Digite o nome do usuario" />
+                <Input type="text" placeholder="Digite o nome do usuario" />
                 <FaRegUser className="figure" />
               </Label>
               <Label>
                 {"E-mail do usuario"}
-                <Input type="text" placeHolder="Digite o email do usuario" />
+                <Input type="text" placeholder="Digite o email do usuario" />
                 <MdOutlineMailOutline className="figure" />
               </Label>
               <Label>
                 {"Senha temporaria"}
                 <Input
                   type="text"
-                  placeHolder="Digite a senha temporaria do usuario"
+                  placeholder="Digite a senha temporaria do usuario"
                 />
                 <PiPasswordDuotone className="figure" />
               </Label>

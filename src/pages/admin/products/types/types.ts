@@ -1,3 +1,5 @@
+
+
 export type TProducts = {
   image: string;
   discount: number;
@@ -35,6 +37,8 @@ export type FormsTypes = {
   alt?: string;
   onClick?: () => void;
   type?: string;
+  ref?:  React.RefObject<HTMLInputElement> | null;
+  onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
 };
 
 export interface TCategorys {
@@ -61,4 +65,5 @@ export type Props = {
   toogle: () => void;
   state: boolean;
   id?: number | string;
+  getProduct?: () => void;
 };

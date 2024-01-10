@@ -8,40 +8,51 @@ import { PiGarage } from "react-icons/pi";
 import { MdDescription } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import { ListData, Props, TProducts } from "../types/types";
-import { BoxEdit, BtnAction, Form, Input, Label, Select, SubTitle, TextArea } from "../styles/styles";
 import { API } from "../../../../services/API";
 import { useEffect, useState } from "react";
+import {
+  BoxEdit,
+  BtnAction,
+  Form,
+  Input,
+  Label,
+  Select,
+  SubTitle,
+  TextArea,
+} from "../../styles/styles";
 
-
-const CreateProduct = ({ state, toogle }: Props): JSX.Element => {
+const CreateProduct = ({ state, toogle, getProduct }: Props): JSX.Element => {
   const { register, handleSubmit, reset } = useForm<TProducts>();
   const [dados, setDados] = useState<ListData>({
     category: [],
-    brands: []
+    brands: [],
   });
 
-  async function getStates(){
+  async function getStates() {
     const categoria = await API.get("/categories");
     const brands = await API.get("/brands");
-    setDados({...dados, category: categoria.data, brands: brands.data});
+    setDados({ ...dados, category: categoria.data, brands: brands.data });
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     getStates();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const criarProduto = async (data: TProducts | undefined) => {
-    await API.post("/products", data).then(() => {
-      reset();
-      toogle();
-    })
-    .catch(err => {
-      console.log(err.response.data);
-    })
+    await API.post("/products", data)
+      .then(() => {
+        reset();
+        if (getProduct !== undefined) {
+          getProduct();
+        }
+        toogle();
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
     console.log(data);
-    
-  }
+  };
 
   return (
     <>
@@ -63,20 +74,22 @@ const CreateProduct = ({ state, toogle }: Props): JSX.Element => {
             </Label>
             <Select {...register("category")}>
               <option>Selecione a categoria</option>
-              {
-                dados.category && dados.category.map((categoria) => 
-                  (<option key={categoria.id} value={categoria.id}>{categoria.name}</option>)
-                )
-              }            
+              {dados.category &&
+                dados.category.map((categoria) => (
+                  <option key={categoria.id} value={categoria.id}>
+                    {categoria.name}
+                  </option>
+                ))}
             </Select>
 
             <Select {...register("brand")}>
               <option>Selecione a marca</option>
-              {
-                dados.brands && dados.brands.map((marca) => 
-                  (<option key={marca.id} value={marca.id}>{marca.brand_name}</option>)
-                )
-              }
+              {dados.brands &&
+                dados.brands.map((marca) => (
+                  <option key={marca.id} value={marca.id}>
+                    {marca.brand_name}
+                  </option>
+                ))}
             </Select>
             <Select {...register("condition")}>
               <option>Selecione a condição:</option>
@@ -111,7 +124,11 @@ const CreateProduct = ({ state, toogle }: Props): JSX.Element => {
             </Label>
             <Label>
               {"deseja dar desconto no produto?"}
-              <Input type="number" placeholder="Digite o valor do desconto" />
+              <Input
+                type="number"
+                placeholder="Digite o valor do desconto"
+                {...register("discount")}
+              />
               <BsCoin className="figure" />
             </Label>
             <Label>
@@ -171,6 +188,5 @@ const CreateProduct = ({ state, toogle }: Props): JSX.Element => {
     </>
   );
 };
-
 
 export default CreateProduct;
