@@ -1,34 +1,18 @@
 import styled from "styled-components";
-import { FaPlus, FaRegUser, FaPencilAlt, FaRegTrashAlt } from "react-icons/fa";
-import { MdOutlineMailOutline } from "react-icons/md";
-import { FiXCircle } from "react-icons/fi";
-import { PiPasswordDuotone } from "react-icons/pi";
-import Modal from "../../../components/modal";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { FaPlus, FaPencilAlt, FaRegTrashAlt } from "react-icons/fa";
+import { useEffect, useState } from "react";
 import { TUser } from "./types/types";
-
-type FormsTypes = {
-  placeholder?: string;
-  alt?: string;
-  type?: string;
-};
-
-interface StyledProps {
-  type?: string;
-  src?: string;
-  alt?: string;
-  style?: string;
-  className?: string;
-  name?: string;
-  value?: string | number | boolean | undefined;
-}
+import { API } from "../../../services/API";
+import CreateUser from "./create_user";
+import EditUser from "./edit_user";
 
 type Flags = {
   createUser: boolean;
   AdminType: boolean;
   OperatorType: boolean;
   editUser: boolean;
+  deleteUser: boolean;
+  confirmDelete: boolean;
 };
 
 const User = (): JSX.Element => {
@@ -37,18 +21,42 @@ const User = (): JSX.Element => {
     editUser: false,
     AdminType: false,
     OperatorType: true,
+    deleteUser: false,
+    confirmDelete: false,
   });
 
-  const { register, handleSubmit, reset } = useForm<TUser>();
+  const [usuarios, setUsuarios] = useState<Array<TUser>>([]);
+  const [id, setId] = useState<number>(0);
 
   const toogleUser = () =>
     setFlags({ ...flags, createUser: !flags.createUser });
-  const toogleUserEdit = () =>
+
+  const toogleUserEdit = (id: number) => {
     setFlags({ ...flags, editUser: !flags.editUser });
-  const toogleAdminType = () =>
-    setFlags({ ...flags, AdminType: !flags.AdminType, OperatorType: false });
-  const toogleOperatorType = () =>
-    setFlags({ ...flags, OperatorType: !flags.OperatorType, AdminType: false });
+    setId(id);
+  };
+
+  const deleteUser = async (id: number) => {
+    await API.delete(`/users/${id}`)
+      .then(() => {
+        console.log("deletado com sucesso");
+        getAllUsers();
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+  const getAllUsers = async () => {
+    await API.get("/users").then((item) => {
+      setUsuarios(item.data);
+    });
+  };
+
+  useEffect(() => {
+    getAllUsers();
+  }, []);
+
   return (
     <>
       <Container>
@@ -78,133 +86,44 @@ const User = (): JSX.Element => {
             </thead>
 
             <tbody>
-              <tr>
-                <td>David Brito</td>
-                <td>david@email.com</td>
-                <td className="userType">Admin</td>
-                <td className="botoes">
-                  <Box>
-                    <Btn onClick={toogleUserEdit}>
-                      <FaPencilAlt className={"icone"} />
-                    </Btn>
-                    <Btn>
-                      <FaRegTrashAlt className={"icone"} />
-                    </Btn>
-                  </Box>
-                </td>
-              </tr>
+              {usuarios &&
+                usuarios.map((item, index) => (
+                  <tr key={index}>
+                    <td>{item.user_name}</td>
+                    <td>{item.user_email}</td>
+                    <td className="userType">
+                      {item.user_level === 1 ? "Admin" : "Operador"}
+                    </td>
+                    <td className="botoes">
+                      <Box>
+                        <Btn onClick={() => toogleUserEdit(item.user_id)}>
+                          <FaPencilAlt className={"icone"} />
+                        </Btn>
+                        <Btn onClick={() => deleteUser(item.user_id)}>
+                          <FaRegTrashAlt className={"icone"} />
+                        </Btn>
+                      </Box>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </Table>
         </ListUsers>
 
         {/* {CRIACAO DE USUARIO} */}
-        <Modal state={flags.createUser}>
-          <CreateUser>
-            <span>
-              <FiXCircle onClick={toogleUser} className="icone" />
-            </span>
-            <SubTitle>Criar um novo usuario</SubTitle>
-            <FormUser>
-              <Label>
-                {"Nome do usuario"}
-                <Input type="text" placeholder="Digite o nome do usuario"
-                {...register("user_name")}
-                />
-                <FaRegUser className="figure" />
-              </Label>
-              <Label>
-                {"E-mail do usuario"}
-                <Input type="text" placeholder="Digite o email do usuario"
-                {...register("user_email")}
-                />
-                <MdOutlineMailOutline className="figure" />
-              </Label>
-              <Label>
-                {"Senha temporaria"}
-                <Input
-                  type="text"
-                  placeholder="Digite a senha temporaria do usuario"
-                  {...register("user_password")}
-                />
-                <PiPasswordDuotone className="figure" />
-              </Label>
-              <Label>
-                {"Tipo de usuario"}
-                <div className="opt">
-                  <BoxInput
-                    onClick={toogleAdminType}
-                    className={flags.AdminType ? "active" : ""}
-                  >
-                    <Checked className={flags.AdminType ? "active" : ""} />
-                    <Check />
-                  </BoxInput>
-                  {"Admin"}
-                  <BoxInput
-                    onClick={toogleOperatorType}
-                    className={flags.OperatorType ? "active" : ""}
-                  >
-                    <Checked className={flags.OperatorType ? "active" : ""} />
-                    <Check />
-                  </BoxInput>
-                  {"Operador"}
-                </div>
-              </Label>
-              <BtnCriar>{"Criar usuario"}</BtnCriar>
-            </FormUser>
-          </CreateUser>
-        </Modal>
+        <CreateUser
+          modal={flags.createUser}
+          toogleUser={toogleUser}
+          getAllUsers={getAllUsers}
+        />
 
         {/* {EDICAO DE USUARIO} */}
-        <Modal state={flags.editUser}>
-          <CreateUser>
-            <span>
-              <FiXCircle onClick={toogleUserEdit} className="icone" />
-            </span>
-            <SubTitle>Editar usuario</SubTitle>
-            <FormUser>
-              <Label>
-                {"Nome do usuario"}
-                <Input type="text" placeholder="Digite o nome do usuario" />
-                <FaRegUser className="figure" />
-              </Label>
-              <Label>
-                {"E-mail do usuario"}
-                <Input type="text" placeholder="Digite o email do usuario" />
-                <MdOutlineMailOutline className="figure" />
-              </Label>
-              <Label>
-                {"Senha temporaria"}
-                <Input
-                  type="text"
-                  placeholder="Digite a senha temporaria do usuario"
-                />
-                <PiPasswordDuotone className="figure" />
-              </Label>
-              <Label>
-                {"Tipo de usuario"}
-                <div className="opt">
-                  <BoxInput
-                    onClick={toogleAdminType}
-                    className={flags.AdminType ? "active" : ""}
-                  >
-                    <Checked className={flags.AdminType ? "active" : ""} />
-                    <Check />
-                  </BoxInput>
-                  {"Admin"}
-                  <BoxInput
-                    onClick={toogleOperatorType}
-                    className={flags.OperatorType ? "active" : ""}
-                  >
-                    <Checked className={flags.OperatorType ? "active" : ""} />
-                    <Check />
-                  </BoxInput>
-                  {"Operador"}
-                </div>
-              </Label>
-              <BtnCriar>{"Criar usuario"}</BtnCriar>
-            </FormUser>
-          </CreateUser>
-        </Modal>
+        <EditUser
+          modal={flags.editUser}
+          getAllUsers={getAllUsers}
+          toogleEdit={() => setFlags({ ...flags, editUser: !flags.editUser })}
+          id={id}
+        />
       </Container>
     </>
   );
@@ -239,6 +158,9 @@ const ActionUsers = styled.div`
 const SubTitle = styled.h3`
   font-size: 22px;
   color: var(--Dark_Gray_2);
+  &.delete {
+    text-align: center;
+  }
   & span {
     font-style: italic;
     color: var(--Dark_Gray);
@@ -246,10 +168,43 @@ const SubTitle = styled.h3`
   }
 `;
 
+// const DeleteUser = styled.div`
+//   width: 500px;
+//   padding: 30px;
+//   background-color: white;
+//   border-radius: 8px;
+//   box-shadow: 1px 1px 40px 10px #00000088;
+//   display: flex;
+//   gap: 30px;
+//   position: relative;
+//   flex-direction: column;
+//   & span {
+//     position: absolute;
+//     right: 10px;
+//     top: 10px;
+//     & .icone {
+//       width: 30px;
+//       height: 30px;
+//       cursor: pointer;
+//       transition-duration: 0.2s;
+//       &:hover {
+//         color: var(--Primary);
+//         scale: 1.1;
+//       }
+//       &:active {
+//         scale: 0.97;
+//       }
+//     }
+//   }
+// `;
+
 const BtnsContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
+  &.delete {
+    justify-content: center;
+  }
 `;
 
 const Btn = styled.button`
@@ -277,167 +232,6 @@ const Btn = styled.button`
     width: 18px;
     height: 18px;
     color: white;
-  }
-`;
-
-const CreateUser = styled.div`
-  width: 500px;
-  padding: 30px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 1px 1px 40px 10px #00000088;
-  display: flex;
-  gap: 30px;
-  position: relative;
-  flex-direction: column;
-  & span {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    & .icone {
-      width: 30px;
-      height: 30px;
-      cursor: pointer;
-      transition-duration: 0.2s;
-      &:hover {
-        color: var(--Primary);
-        scale: 1.1;
-      }
-      &:active {
-        scale: 0.97;
-      }
-    }
-  }
-`;
-
-const FormUser = styled.form`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-`;
-
-const Label = styled.label`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  font-size: 16px;
-  font-weight: bold;
-  color: var(--Light_Gray);
-  position: relative;
-  margin: 10px 0;
-
-  & .figure {
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    right: 20px;
-    bottom: 15px;
-    transition-duration: 0.2s;
-  }
-
-  & .opt {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-`;
-
-const Input = styled.input<FormsTypes>`
-  width: 100%;
-  height: 50px;
-  border-radius: 8px;
-  border: 1px solid transparent;
-  background-color: var(--Light_Gray_2);
-  padding-left: 20px;
-  transition-duration: 0.2s;
-  color: var(--Dark_Gray_2);
-  font-size: 14px;
-  font-weight: bold;
-  &:focus {
-    border-color: var(--Primary);
-    & + .figure {
-      color: var(--Primary);
-    }
-  }
-
-  &::placeholder {
-    font-weight: 500;
-    letter-spacing: 1px;
-  }
-`;
-
-const BoxInput = styled.div<StyledProps>`
-  width: 22px;
-  height: 22px;
-  overflow: hidden;
-  border-radius: 2px;
-  position: relative;
-  transition-duration: 0.2s;
-  border: 1px solid var(--Light_Gray_2);
-  &.active {
-    background-color: var(--Primary);
-  }
-`;
-
-const Check = styled.input<StyledProps>`
-  width: 100%;
-  height: 100%;
-  border-radius: 2px;
-  cursor: pointer;
-  position: relative;
-  z-index: 0;
-  background-color: transparent;
-  opacity: 0;
-`;
-
-const Checked = styled.div<StyledProps>`
-  width: 0%;
-  height: 0px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  border-top: 4px solid var(--White);
-  border-right: 4px solid var(--White);
-  top: 40%;
-  left: 40%;
-  z-index: 1;
-  /* transform: translate(-40%, -40%) rotate(135deg); */
-  z-index: 0;
-  transition-duration: 0.3s;
-  cursor: pointer;
-  scale: 0;
-
-  &.active {
-    width: 80%;
-    height: 8px;
-    transform: translate(-40%, -40%) rotate(135deg);
-    scale: 1;
-  }
-`;
-
-const BtnCriar = styled.button`
-  margin-top: 20px;
-  width: 100%;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--White);
-  background-color: var(--Primary);
-  border-radius: 8px;
-  border: none;
-  font-size: 16px;
-  font-weight: bold;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition-duration: 0.2s;
-
-  &:hover {
-    box-shadow: 1px 2px 5px 2px #00000065;
-  }
-  &:active {
-    scale: 0.97;
   }
 `;
 

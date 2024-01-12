@@ -3,4 +3,5 @@ export type TUser = {
     user_name: string;
     user_password: string;
     user_level: number;
+    user_id: number;
 }

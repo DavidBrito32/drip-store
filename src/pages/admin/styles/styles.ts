@@ -1,5 +1,4 @@
-import React from "react";
-import styled, { IStyledComponent } from "styled-components";
+import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
@@ -36,7 +35,7 @@ export const ErrorText = styled.h3`
   width: 100%;
   padding: 10px;
   color: black;
-  background-color: #F72B0255;
+  background-color: #f72b0255;
   font-size: 16px;
   font-weight: bold;
   border-radius: 4px;
@@ -45,7 +44,7 @@ export const SuccessText = styled.h3`
   width: 100%;
   padding: 10px;
   color: black;
-  background-color: #02F71255;
+  background-color: #02f71255;
   font-size: 16px;
   font-weight: bold;
   border-radius: 4px;
@@ -180,7 +179,7 @@ export const Table = styled.table`
       white-space: nowrap;
       overflow: hidden;
 
-      & img{
+      & img {
         width: 150px;
         height: 150px;
         object-fit: contain;
@@ -203,7 +202,7 @@ export const Box = styled.div`
   align-items: center;
 `;
 
-export const Form: IStyledComponent<"web", FastOmit<React.DetailedHTMLProps<React.FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>, never>> = styled.form`
+export const Form = styled.form`
   width: 100%;
   max-height: 500px;
   overflow-y: auto;
@@ -239,7 +238,7 @@ export const Label = styled.label`
   }
 `;
 
-export const Input: IStyledComponent<"web", FastOmit<React.DetailedHTMLProps<React.FormHTMLAttributes<HTMLInputElement>, HTMLInputElement>, never>> = styled.input`
+export const Input = styled.input`
   width: 100%;
   height: 50px;
   border-radius: 8px;

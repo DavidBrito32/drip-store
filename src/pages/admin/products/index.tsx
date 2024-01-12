@@ -19,6 +19,9 @@ const ProductsDashboard = (): JSX.Element => {
   });
 
   const [products, setProducts] = useState<Array<TRenderProduct>>([]);
+  console.log(products);
+  
+  
   const getProducts = async () => {
     await API.get("/products").then((response) => {
       setProducts(response.data);
@@ -28,6 +31,15 @@ const ProductsDashboard = (): JSX.Element => {
   useEffect(() => {
     getProducts();
   }, []);
+
+  const deleteProduct = async (id: string | number): Promise<void> => {
+    await API.delete(`/products/${id}`).then(()=>{
+      console.log("Deletado com sucesso");
+        getProducts();
+    }).catch((e)=>{
+      console.log(e)
+    })
+  }
 
 
   const toogleProduct = () =>
@@ -70,6 +82,7 @@ const ProductsDashboard = (): JSX.Element => {
               <th>Nome do Produto</th>
               <th>Marca do Produto</th>
               <th>Categoria do Produto</th>
+              <th>Imagem do produto</th>
               <th>Preço do Produto</th>
               <th>Desconto</th>
               <th>Açoes</th>
@@ -77,11 +90,12 @@ const ProductsDashboard = (): JSX.Element => {
           </thead>
 
           <tbody>
-            {products.map((item) => (
+            {typeof products !== "string" && products.map((item) => (
               <tr key={item.product_id}>
                 <td>{item.product_name}</td>
                 <td>{item.brand_name}</td>
                 <td>{item.category_name}</td>
+                <td><img src={item.product_image} alt="" /></td>
                 <td>
                   R$: <span>{item.product_price}</span>
                 </td>
@@ -91,7 +105,7 @@ const ProductsDashboard = (): JSX.Element => {
                     <Btn onClick={toogleEditProduct}>
                       <FaPencilAlt className={"icone"} />
                     </Btn>
-                    <Btn>
+                    <Btn onClick={() => deleteProduct(item.product_id)}>
                       <FaRegTrashAlt className={"icone"} />
                     </Btn>
                   </Box>

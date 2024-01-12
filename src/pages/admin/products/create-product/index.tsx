@@ -39,7 +39,7 @@ const CreateProduct = ({ state, toogle, getProduct }: Props): JSX.Element => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const criarProduto = async (data: TProducts | undefined) => {
+  const criarProduto = async (data: TProducts | undefined): Promise<void> => {
     await API.post("/products", data)
       .then(() => {
         reset();
@@ -51,8 +51,9 @@ const CreateProduct = ({ state, toogle, getProduct }: Props): JSX.Element => {
       .catch((err) => {
         console.log(err.response.data);
       });
-    console.log(data);
   };
+
+
 
   return (
     <>

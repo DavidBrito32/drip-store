@@ -1,4 +1,8 @@
 
+enum User {
+  ADMIN = 1,
+  OPERATOR = 2
+}
 
 export type TProducts = {
   image: string;
@@ -16,6 +20,14 @@ export type TProducts = {
   stock: number;
 }
 
+export type TUser = {
+  user_id: string;
+  user_name: string;
+  user_email: string;
+  user_password: string;
+  user_level: User;
+}
+
 export type TRenderProduct = {
   product_id: number;
   product_name: string;
@@ -23,6 +35,7 @@ export type TRenderProduct = {
   brand_name: string;
   category_name: string;
   product_price: number;
+  product_image: string;
 }
 
 export type FlagsPage = {

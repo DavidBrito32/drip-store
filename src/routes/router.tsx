@@ -30,6 +30,7 @@ const Router = (): JSX.Element => {
           <Route path="/auth/login"element={<LoginPage />} />
           <Route path="/auth/logout" element={<Logout />} />
         </Route>
+        
         <Route path="/dashboard" element={<DashboardPage />}>
           <Route index element={<User />} />
           <Route path="products" element={<ProductsDashboard />} />
