@@ -26,7 +26,8 @@ const Router = (): JSX.Element => {
           <Route path="/my-order" element={<MyOrders />} />
         </Route>
 
-        <Route path="/auth" element={<AuthLayout />}>
+        <Route path="/auth" element={<AuthLayout />}
+        >
           <Route path="/auth/login"element={<LoginPage />} />
           <Route path="/auth/logout" element={<Logout />} />
         </Route>

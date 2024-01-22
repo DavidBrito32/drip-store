@@ -2,8 +2,10 @@ import { Link, NavLink, NavigateFunction, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { FiShoppingCart } from "react-icons/fi";
 import { IoIosSearch } from "react-icons/io";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import CartItems from "./cart-items/assets";
+import { FaUser } from "react-icons/fa";
+import { AuthContext } from "../../contexts/AuthContext";
 
 interface Flags {
   burger: boolean;
@@ -12,13 +14,17 @@ interface Flags {
 }
 
 const Header = (): JSX.Element => {
+  // @ts-expect-error not possible validation type of context
+  const { userCredencial: User, setUserCredencial } = useContext(AuthContext);
+  const navigate: NavigateFunction = useNavigate(); 
+
   const [flags, setFlags] = useState<Flags>({
     burger: false,
     input: false,
     cart: false,
   });
 
-  const navigate: NavigateFunction = useNavigate();
+
 
   const mudaBurger = () =>
     setFlags({ ...flags, burger: !flags.burger, input: false, cart: false });
@@ -26,6 +32,12 @@ const Header = (): JSX.Element => {
     setFlags({ ...flags, input: !flags.input, burger: false, cart: false });
   const mudaCart = () =>
     setFlags({ ...flags, cart: !flags.cart, burger: false, input: false });
+
+    const deslogged = () => {
+      localStorage.removeItem("user");
+      setUserCredencial(null);
+      navigate("/")
+    }
 
   return (
     <>
@@ -53,9 +65,21 @@ const Header = (): JSX.Element => {
 
         <div
           className={flags.burger ? "action-button active" : "action-button"}
-        >
-          <Link to={"/auth/logout"}>Cadastre-se</Link>
-          <button onClick={() => navigate("/auth/login")}>Entrar</button>
+        >          
+          {
+            User ? (
+              <div className="logado">
+                <FaUser className={"icone"} />
+                <h4 title={User.user_name}>{User.user_name}</h4>
+                <h5 className="click" onClick={deslogged}>Sair</h5>
+              </div>
+            ): (
+              <>
+              <Link to={"/auth/logout"}>Cadastre-se</Link>
+              <button onClick={() => navigate("/auth/login")}>Entrar</button>               
+              </>
+            )
+          }
         </div>
 
         <div className="cart">
@@ -285,6 +309,32 @@ const HeaderContainer = styled.header`
       &:active {
         scale: 0.9;
       }
+    }
+
+    & .logado{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 14px;
+        & .icone{
+          width: 25px;
+          height: 25px;
+          color: var(--Primary);
+        }
+
+        & h4{
+          overflow: hidden;
+          max-width: 100px;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        & .click{
+          font-size: 12px;
+          color: var(--Light_Gray);
+          cursor: pointer;
+        }
     }
   }
 

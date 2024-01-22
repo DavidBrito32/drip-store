@@ -52,9 +52,7 @@ const CreateProduct = ({ state, toogle, getProduct }: Props): JSX.Element => {
         console.log(err.response.data);
       });
   };
-
-
-
+  
   return (
     <>
       <Modal state={state}>
@@ -116,8 +114,8 @@ const CreateProduct = ({ state, toogle, getProduct }: Props): JSX.Element => {
             <Label>
               {"Preço do produto"}
               <Input
-                type="number"
-                pattern="[0-9]*"
+                type="text"
+                // pattern="[0-9]*"
                 placeholder="Digite o preço do produto"
                 {...register("price")}
               />

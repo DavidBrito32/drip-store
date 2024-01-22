@@ -286,7 +286,7 @@ export const TextArea = styled.textarea`
   }
 `;
 
-export const Select = styled.select`
+export const Select: IStyledComponent<"web", FastOmit<React.DetailedHTMLProps<React.SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement>, never>> = styled.select`
   width: 45%;
   margin: 10px 0;
   height: 50px;

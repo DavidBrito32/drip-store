@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import Card1 from "./cards1";
 import Card2 from "./cards2";
-import { useAxios } from "../../hooks/useAxios";
-import { BASE_URL_LANDPAGE } from './../../constants/BASE_URL_LANDPAGE';
+import { useState } from "react";
 
 interface RequestData {
   id: number;
@@ -11,9 +10,7 @@ interface RequestData {
 }
 
 const Colecoes = (): JSX.Element => {
-  const { data, loading, error } = useAxios<RequestData>(
-    `${BASE_URL_LANDPAGE}categorias`
-  );
+  const [data, setData] = useState([]);
 
   return (
     <>
@@ -28,8 +25,6 @@ const Colecoes = (): JSX.Element => {
         <SupTitle>{"Categorias em destaque"}</SupTitle>
 
         <ListaIcones>
-          {loading && <h1>Carregando Dados . . .</h1>}
-          {error && <h1>{error}</h1>}
           {data.map((item: RequestData) => (
             <Card2 key={item.id} image={item.image} titulo={item.title} />
           ))}

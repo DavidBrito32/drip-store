@@ -11,12 +11,14 @@ import {
 
 import { useState } from "react";
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
+import useProtectedPage from "../../../hooks/useLogged";
 
 type State = {
   openModal: boolean;
 };
 
 const DashboardPage = (): JSX.Element => {
+  useProtectedPage();
   const [flags, setFlags] = useState<State>({
     openModal: false,
   });

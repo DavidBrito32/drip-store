@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { IStyledComponent } from "styled-components";
 import Modal from "../../../../components/modal";
 import { FiXCircle } from "react-icons/fi";
 import { FaRegUser } from "react-icons/fa";
@@ -7,7 +7,7 @@ import { PiPasswordDuotone } from "react-icons/pi";
 import { Select } from "../../styles/styles";
 import { TUser } from "../types/types";
 import { API } from "../../../../services/API";
-import { useForm } from "react-hook-form";
+import { useForm } from "../../../../hooks/useForm";
 
 type Props = {
   modal: boolean;
@@ -15,15 +15,28 @@ type Props = {
   getAllUsers: () => Promise<void>;
 };
 
-const CreateUser = ({ modal, toogleUser, getAllUsers}: Props): JSX.Element => {
-  const { register, handleSubmit, reset } = useForm<TUser>();
-  const createUser = async (data: TUser): Promise<void> => {
-    await API.post("/users", data)
+const CreateUser = ({ modal, toogleUser, getAllUsers }: Props): JSX.Element => {
+  // const { register, handleSubmit, reset } = useForm<TUser>();
+  const { form, changeForm, clearInputs } = useForm<TUser>({
+    user_name: "",
+    user_email: "",
+    user_level: 2,
+    user_password: "",
+  });
+
+  const createUser = async (e: InputEvent): Promise<void> => {
+    e.preventDefault();
+    await API.post("/users", {
+      user_name: form.user_name,
+      user_email: form.user_email,
+      user_password: form.user_password,
+      user_level: form.user_level
+    })
       .then(() => {
         toogleUser();
         getAllUsers();
-        reset();
-        console.log("usuario criado com sucesso!");
+        clearInputs();
+        console.log(form);
       })
       .catch((er) => {
         console.log(er.response.data);
@@ -37,13 +50,15 @@ const CreateUser = ({ modal, toogleUser, getAllUsers}: Props): JSX.Element => {
             <FiXCircle onClick={toogleUser} className="icone" />
           </span>
           <SubTitle>Criar um novo usuario</SubTitle>
-          <FormUser onSubmit={handleSubmit(createUser)}>
+          <FormUser onSubmit={createUser}>
             <Label>
               {"Nome do usuario"}
               <Input
                 type="text"
                 placeholder="Digite o nome do usuario"
-                {...register("user_name")}
+                name="user_name"
+                value={form.user_name}
+                onChange={changeForm}
               />
               <FaRegUser className="figure" />
             </Label>
@@ -52,7 +67,9 @@ const CreateUser = ({ modal, toogleUser, getAllUsers}: Props): JSX.Element => {
               <Input
                 type="text"
                 placeholder="Digite o email do usuario"
-                {...register("user_email")}
+                name="user_email"
+                value={form.user_email}
+                onChange={changeForm}
               />
               <MdOutlineMailOutline className="figure" />
             </Label>
@@ -61,16 +78,22 @@ const CreateUser = ({ modal, toogleUser, getAllUsers}: Props): JSX.Element => {
               <Input
                 type="text"
                 placeholder="Digite a senha temporaria do usuario"
-                {...register("user_password")}
+                name="user_password"
+                value={form.user_password}
+                onChange={changeForm}
               />
               <PiPasswordDuotone className="figure" />
             </Label>
             <Label>
               {"Tipo de usuario"}
               <div className="opt">
-                <Select {...register("user_level")}>
+                <Select
+                  name="user_level"
+                  value={form.user_level}
+                  onChange={changeForm}
+                >
                   <option value={1}>Admin</option>
-                  <option value={2}>operador</option>
+                  <option value={2}> operador</option>
                 </Select>
               </div>
             </Label>
@@ -92,7 +115,7 @@ const SubTitle = styled.h3`
   }
 `;
 
-const FormUser = styled.form`
+const FormUser: IStyledComponent<"web", FastOmit<React.DetailedHTMLProps<React.FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>, never>> = styled.form`
   width: 100%;
   display: flex;
   flex-direction: column;

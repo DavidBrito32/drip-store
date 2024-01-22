@@ -3,8 +3,11 @@ import { FaEye, FaEyeSlash, FaFacebook } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import sapato1 from "./assets/sapato-frente.svg";
 import sapato2 from "./assets/sapato-verso.svg";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
+import { API } from "../../../services/API";
+import { AuthContext } from "../../../contexts/AuthContext";
 
 interface StyledProps {
   placeholder?: string;
@@ -19,10 +22,43 @@ type Flags = {
   password: boolean;
 };
 
+type TLogin = {
+  email: string;
+  password: string
+}
+
+
 const LoginPage = () => {
+  const navigate = useNavigate();
+  // @ts-expect-error not possible validation type of context
+  const { setUserCredencial } = useContext(AuthContext);
   const [flags, setFlags] = useState<Flags>({
     password: false,
   });
+
+  const { register, handleSubmit, reset  } = useForm<TLogin>();
+
+  const Submit = async (data: TLogin) => {
+      reset();
+      requisicao(data);
+  }
+
+  const requisicao = async (data: TLogin) => {
+    await API.post("/login", {email: data.email, password: data.password})
+      .then((response) => {
+        setUserCredencial(response.data[0]);
+        localStorage.setItem("user", JSON.stringify(response.data[0]));
+
+          if(response.data[0].user_level === 1){
+            navigate("/dashboard")
+          }else if(response.data[0].user_level === 2){
+            navigate("/")
+          }
+      })
+      .catch((err: Error) => console.log(err.message));
+  }
+
+
 
   const tooglePassword = () =>
     setFlags({ ...flags, password: !flags.password });
@@ -38,13 +74,18 @@ const LoginPage = () => {
           <ContainerInput>
             <Label>
               <TitleLabel>Login *</TitleLabel>
-              <Input type="email" placeholder="Insira seu login ou email" />
+              <Input 
+                type="email" 
+                placeholder="Insira seu login ou email"
+                {...register("email", {required: true})}
+                />
             </Label>
             <Label>
               <TitleLabel>Senha *</TitleLabel>
               <Input
                 type={flags.password ? "text" : "password"}
                 placeholder="Insira sua senha"
+                {...register("password")}
               />
               {flags.password ? (
                 <FaEyeSlash onClick={tooglePassword} className={"icon"} />
@@ -54,7 +95,7 @@ const LoginPage = () => {
             </Label>
           </ContainerInput>
           <ResetPassword>Esqueci minha senha</ResetPassword>
-          <ButtonAction>Acessar conta</ButtonAction>
+          <ButtonAction type="button" onClick={() => handleSubmit(Submit)()}>Acessar conta</ButtonAction>
           <LoginOptions>
             Ou faça login com <FcGoogle className="social" />{" "}
             <FaFacebook className="social face" />{" "}
@@ -89,7 +130,7 @@ const ContainerLogin = styled.div<StyledProps>`
   }
 `;
 
-const FormLogin = styled.form<StyledProps>`
+const FormLogin = styled.form`
   width: 585px;
   height: 560px;
   display: flex;

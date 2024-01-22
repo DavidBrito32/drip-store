@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { useAxios } from "../../hooks/useAxios";
-import { useState } from "react";
-import { BASE_URL_LANDPAGE } from "../../constants/BASE_URL_LANDPAGE";
+import { useState, useEffect } from "react";
+import { API } from "../../services/API";
+import { AxiosResponse } from "axios";
 interface StyleProps {
   $largura?: number;
   $slide?: number;
@@ -17,17 +17,33 @@ type Banner = {
   description: string;
   ctaButtonText: string;
   ctaButtonColor: string;
-  imageBanner: string;
+  image: string;
 };
 
 const Carrousel = () => {
   const [slide, setSlide] = useState<number>(0);
-  const { data, loading, error } = useAxios<Banner>(`${BASE_URL_LANDPAGE}banners`);
+  const [data, setData] = useState<Array<Banner>>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const getBanners = async (): Promise<void> => {
+    await API.get("banners").then((dados: AxiosResponse<Array<Banner>>) => {
+      setData(dados.data);
+    }).catch((err) => {
+      setError(err.message);
+    })
+    setLoading(false);
+  }
+  useEffect(()=>{
+    getBanners();
+  },[]);  
 
   return (
     <>
       <Container>
         <Items $largura={data.length} $slide={slide}>
+          {loading && (<h1>Carregando...</h1>)}
+          {error !== undefined && (<h1>{error}</h1>)}
           {data !== undefined &&
             data.map(
               (item: Banner): JSX.Element => (
@@ -38,14 +54,12 @@ const Carrousel = () => {
                     <Description>{item.description}</Description>
                     <Button $ctaColor={item.ctaButtonColor}>Ver Ofertas</Button>
                   </Conteudo>
-                  <FigureImage src={item.imageBanner} alt="Tenis" />
+                  <FigureImage src={item.image} alt="Tenis" />
                 </Item>
               )
             )}
         </Items>
         <CarousselPagination>
-          {loading && <h1>Carregando Dados ...</h1>}
-          {error && <h1>{error}</h1>}
           {data.map(
             (_item: Banner, index: number): JSX.Element => (
               <CarousselPaginationPill

@@ -24,7 +24,6 @@ const User = (): JSX.Element => {
     deleteUser: false,
     confirmDelete: false,
   });
-
   const [usuarios, setUsuarios] = useState<Array<TUser>>([]);
   const [id, setId] = useState<number>(0);
 
@@ -207,7 +206,7 @@ const BtnsContainer = styled.div`
   }
 `;
 
-const Btn = styled.button`
+const Btn: IStyledComponent<"web", FastOmit<React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, never>> = styled.button`
   display: flex;
   align-items: center;
   gap: 3px;
